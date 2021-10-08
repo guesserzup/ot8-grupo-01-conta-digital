@@ -3,12 +3,12 @@ package com.zupacademy.contadigital.contas.credita;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
-public class RequestDtoCredita {
+public class RequestOperacao {
 
     @Positive
     private BigDecimal valor;
 
-    public RequestDtoCredita(BigDecimal valor) {
+    public RequestOperacao(BigDecimal valor) {
         this.valor = valor;
     }
 

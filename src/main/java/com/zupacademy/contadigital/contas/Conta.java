@@ -1,5 +1,8 @@
 package com.zupacademy.contadigital.contas;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +15,8 @@ import java.math.BigDecimal;
 @Entity
 public class Conta {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String numeroConta;
@@ -32,4 +36,18 @@ public class Conta {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void deposita(BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) > 0) {
+            this.saldo = this.saldo.add(valor);
+        }
+        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Saldo insuficiente para realizar a operação");
+    }
 }
