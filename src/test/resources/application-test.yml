@@ -1,10 +1,9 @@
-
 spring:
   datasource:
-    driverClassName: org.postgresql.Driver
-    password: password
-    url: jdbc:postgresql://localhost:5432/contadigital-test
-    username: keycloak
+    username: user
+    url: jdbc:h2:mem:contadigital
+    driverClassName: org.h2.Driver
+    password: ''
   jpa:
     generate-ddl: true
     hibernate:

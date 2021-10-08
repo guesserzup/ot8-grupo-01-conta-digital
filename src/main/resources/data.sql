@@ -1,1 +1,1 @@
-INSERT INTO public.conta (id_cliente, num_conta, saldo) VALUES(1, 1, 242332);
+INSERT INTO public.conta (id_cliente, numero_conta, saldo) VALUES(1, 1, 550);

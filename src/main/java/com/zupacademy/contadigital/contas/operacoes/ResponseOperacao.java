@@ -1,4 +1,4 @@
-package com.zupacademy.contadigital.contas.credita;
+package com.zupacademy.contadigital.contas.operacoes;
 
 import com.zupacademy.contadigital.contas.Conta;
 

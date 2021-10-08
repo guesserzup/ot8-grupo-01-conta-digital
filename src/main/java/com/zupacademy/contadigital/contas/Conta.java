@@ -47,15 +47,21 @@ public class Conta {
     public void deposita(BigDecimal valor) {
         if (valor.compareTo(BigDecimal.ZERO) > 0) {
             this.saldo = this.saldo.add(valor);
+            return;
         }
+
+        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     public void saca(BigDecimal valor) {
         if(valor.compareTo(BigDecimal.ZERO) > 0
                 && this.saldo.compareTo(BigDecimal.ZERO) > 0
-                && this.saldo.compareTo(valor) > 0){
+                && this.saldo.compareTo(valor) >- 0){
             final BigDecimal subtract = this.saldo.subtract(valor);
             this.saldo = subtract;
+            return;
         }
+
+        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
