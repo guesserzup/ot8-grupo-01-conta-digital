@@ -44,7 +44,7 @@ class ControllerCreditaTest {
     }
 
     @Test
-    public void naoEfetuaDepositoComValorVazio() throws Exception{
+    public void naoEfetuaDepositoComValorNegativo() throws Exception{
         Conta conta = contaRepository.findById(1L).get();
 
         RequestOperacao requestOperacao = new RequestOperacao(new BigDecimal(-150));
