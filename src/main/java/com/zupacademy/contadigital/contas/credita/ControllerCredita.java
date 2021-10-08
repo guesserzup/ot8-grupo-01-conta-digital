@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/contas")
+@RequestMapping("/contas")
 public class ControllerCredita {
 
     @Autowired
@@ -26,4 +26,5 @@ public class ControllerCredita {
         contaRepository.save(conta);
         return  ResponseEntity.ok().body(new ResponseOperacao(conta));
     }
+
 }

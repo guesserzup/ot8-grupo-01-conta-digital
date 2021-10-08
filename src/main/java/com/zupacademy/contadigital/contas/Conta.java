@@ -48,6 +48,14 @@ public class Conta {
         if (valor.compareTo(BigDecimal.ZERO) > 0) {
             this.saldo = this.saldo.add(valor);
         }
-        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Saldo insuficiente para realizar a operação");
+    }
+
+    public void saca(BigDecimal valor) {
+        if(valor.compareTo(BigDecimal.ZERO) > 0
+                && this.saldo.compareTo(BigDecimal.ZERO) > 0
+                && this.saldo.compareTo(valor) > 0){
+            final BigDecimal subtract = this.saldo.subtract(valor);
+            this.saldo = subtract;
+        }
     }
 }
