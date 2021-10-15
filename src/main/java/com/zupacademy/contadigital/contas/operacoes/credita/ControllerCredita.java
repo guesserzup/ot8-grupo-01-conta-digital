@@ -23,6 +23,7 @@ public class ControllerCredita {
     public ResponseOperacao deposito(@PathVariable("id") Long id, @RequestBody @Valid RequestOperacao requestCredita) {
         Conta conta = contaRepository.findById(id).orElseThrow(() -> {
             throw new RegraNegocioException("Não existe conta com o id recebido", "conta", id.toString());
+
         });
 
         conta.deposita(requestCredita.getValor());

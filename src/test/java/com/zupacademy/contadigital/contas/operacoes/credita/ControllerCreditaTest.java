@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -54,5 +55,23 @@ class ControllerCreditaTest {
                         .content(gson.toJson(requestOperacao)))
                 .andExpect(status().isBadRequest());
     }
+
+
+
+
+
+
+    @Test
+    public void naoEfetuaDepositoEmContaInexistente() throws Exception{
+        Conta conta = contaRepository.findById(1L).get();
+
+        RequestOperacao requestOperacao = new RequestOperacao(new BigDecimal(-150));
+
+        mockMvc.perform(put("/contas/" + ThreadLocalRandom.current().nextInt() + "/credita")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(gson.toJson(requestOperacao)))
+                .andExpect(status().isNotFound());
+    }
+
 
 }
