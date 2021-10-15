@@ -44,19 +44,18 @@ public class ContaExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<StandardError> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public List<ErrorsFields> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         List<ErrorsFields> listValidationErros = new ArrayList<>();
+
         List<FieldError> listErrors = ex.getBindingResult().getFieldErrors();
+
         listErrors.forEach(fieldError -> {
             final String messageSourceMessage = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
-            final ErrorsFields errorsFields = new ErrorsFields(LocalDateTime.now(), HttpStatus.BAD_REQUEST.value(),
-                    HttpStatus.BAD_REQUEST.toString(),
-                    ex.getClass().toString(), fieldError.getField(), messageSourceMessage);
-
-
+            final ErrorsFields errorsFields = new ErrorsFields(fieldError.getField(), messageSourceMessage);
+            listValidationErros.add(errorsFields);
         });
 
-        return null;
+        return listValidationErros;
     }
 
 
