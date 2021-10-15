@@ -56,21 +56,16 @@ class ControllerCreditaTest {
                 .andExpect(status().isBadRequest());
     }
 
-
-
-
-
-
     @Test
     public void naoEfetuaDepositoEmContaInexistente() throws Exception{
         Conta conta = contaRepository.findById(1L).get();
 
-        RequestOperacao requestOperacao = new RequestOperacao(new BigDecimal(-150));
+        RequestOperacao requestOperacao = new RequestOperacao(new BigDecimal(150));
 
-        mockMvc.perform(put("/contas/" + ThreadLocalRandom.current().nextInt() + "/credita")
+        mockMvc.perform(put("/contas/" + 10 + "/credita")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(gson.toJson(requestOperacao)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 
 

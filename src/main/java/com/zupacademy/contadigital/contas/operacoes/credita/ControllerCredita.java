@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -20,6 +21,7 @@ public class ControllerCredita {
     private ContaRepository contaRepository;
 
     @PutMapping("/{id}/credita")
+    @Transactional
     public ResponseOperacao deposito(@PathVariable("id") Long id, @RequestBody @Valid RequestOperacao requestCredita) {
         Conta conta = contaRepository.findById(id).orElseThrow(() -> {
             throw new RegraNegocioException("Não existe conta com o id recebido", "conta", id.toString());

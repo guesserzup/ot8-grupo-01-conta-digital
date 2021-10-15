@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequestMapping("/contas")
 public class ControllerDebita {
@@ -19,6 +21,7 @@ public class ControllerDebita {
 
 
     @PutMapping("/{id}/debita")
+    @Transactional
     public ResponseOperacao saque(@RequestBody RequestOperacao requestOperacao, @PathVariable Long id) {
 
         Conta conta = contaRepository.findById(id).orElseThrow(() -> {
