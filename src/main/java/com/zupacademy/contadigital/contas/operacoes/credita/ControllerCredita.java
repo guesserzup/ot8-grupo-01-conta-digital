@@ -4,6 +4,7 @@ import com.zupacademy.contadigital.contas.Conta;
 import com.zupacademy.contadigital.contas.ContaRepository;
 import com.zupacademy.contadigital.contas.operacoes.RequestOperacao;
 import com.zupacademy.contadigital.contas.operacoes.ResponseOperacao;
+import com.zupacademy.contadigital.exception.RegraNegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class ControllerCredita {
     @PutMapping("/{id}/credita")
     public ResponseOperacao deposito(@PathVariable("id") Long id, @RequestBody @Valid RequestOperacao requestCredita) {
         Conta conta = contaRepository.findById(id).orElseThrow(() -> {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não existe conta com essa identificação.");
+            throw new RegraNegocioException("Não existe conta com o id recebido", "conta", id.toString());
         });
 
         conta.deposita(requestCredita.getValor());

@@ -1,5 +1,6 @@
 package com.zupacademy.contadigital.contas;
 
+import com.zupacademy.contadigital.exception.RegraNegocioException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -50,7 +51,7 @@ public class Conta {
             return;
         }
 
-        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        throw new RegraNegocioException("Valor inválido para depositar", "saldo", valor.toString());
     }
 
     public void saca(BigDecimal valor) {
@@ -62,6 +63,6 @@ public class Conta {
             return;
         }
 
-        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        throw new RegraNegocioException("Valor inválido para saque", "saldo", valor.toString());
     }
 }
